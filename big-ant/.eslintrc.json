@@ -1,0 +1,7 @@
+{
+  "extends": ["next/core-web-vitals", "pettier"],
+  "plugins": ["prettier"],
+  "rules": {
+    "prettier/prettier": "warn"
+  }
+}
