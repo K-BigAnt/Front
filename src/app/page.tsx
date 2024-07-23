@@ -1,10 +1,11 @@
 "use client";
 
 import * as Popover from "@radix-ui/react-popover";
+import axios from "axios";
 import useSWR from "swr";
 
 export default function Home() {
-  const fetcher = () => fetch("/api/test").then((res) => res.json());
+  const fetcher = () => axios.get("/api/test").then((res) => res.data);
   const { data, error, isLoading } = useSWR("/api/test", fetcher);
 
   console.log(data);
