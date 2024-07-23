@@ -8,28 +8,20 @@ export default function Home() {
   const fetcher = () => axios.get("/api/test").then((res) => res.data);
   const { data, error, isLoading } = useSWR("/api/test", fetcher);
 
-  console.log(data);
-  if (error) {
-    console.log("error");
-    return;
-  }
-  if (isLoading) {
-    console.log("loading");
-    return;
-  }
   return (
     <div>
       <Popover.Root>
-        <Popover.Trigger className="mx-10 mt-10">
+        <Popover.Trigger className="mx-10 mt-10" name="popover-trigger">
           성준님 열어보세요
         </Popover.Trigger>
         <Popover.Portal>
           <Popover.Content className="">
-            {data.text}
+            {data?.text}
             <Popover.Arrow className="" />
           </Popover.Content>
         </Popover.Portal>
       </Popover.Root>
+      <button name="test-button">버튼</button>
     </div>
   );
 }
