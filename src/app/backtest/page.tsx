@@ -27,7 +27,23 @@ export default function BacktestPage() {
   return (
     <div className="flex flex-col items-center justify-center mt-10">
       {typeof window !== "undefined" && <Pie />}
-      {typeof window !== "undefined" && <Financial />}
+      {typeof window !== "undefined" && (
+        <Financial data={DataToFinancial(data.prices)} />
+      )}
     </div>
   );
 }
+
+const DataToFinancial = (prices: any) => {
+  const data = prices.map((price: any) => {
+    const timestamp = new Date(
+      price.date.slice(0, 4) +
+        "-" +
+        price.date.slice(4, 6) +
+        "-" +
+        price.date.slice(6, 8)
+    ).getTime();
+    return [timestamp, parseFloat(price.closePrice)];
+  });
+  return data.reverse();
+};
