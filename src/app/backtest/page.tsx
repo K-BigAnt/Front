@@ -20,7 +20,6 @@ export default function BacktestPage() {
     fetcher
   );
 
-  console.log(data);
   if (error) return <div>Error: {error.message}</div>;
   if (isLoading) return <div>Loading...</div>;
 
