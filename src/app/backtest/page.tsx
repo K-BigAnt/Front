@@ -1,9 +1,10 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import dynamic from "next/dynamic";
 import axios from "axios";
 import useSWR from "swr";
+import Initialize from "./Initialize";
 
 const Financial = dynamic(() => import("../component/Chart/Financial"), {
   ssr: false,
@@ -24,7 +25,10 @@ export default function BacktestPage() {
   if (isLoading) return <div>Loading...</div>;
 
   return (
-    <div className="flex flex-col items-center justify-center mt-10">
+    <div className="flex flex-col items-center justify-center mt-10 gap-y-10">
+      <Initialize />
+
+      <button>백테스트 실행</button>
       {typeof window !== "undefined" && <Pie />}
       {typeof window !== "undefined" && (
         <Financial data={DataToFinancial(data.prices)} />
