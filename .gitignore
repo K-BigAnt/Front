@@ -4,6 +4,7 @@
 /node_modules
 /.pnp
 .pnp.js
+.pnp.cjs
 .yarn/install-state.gz
 
 # testing
@@ -44,5 +45,8 @@ next-env.d.ts
 !.yarn/releases
 !.yarn/sdks
 !.yarn/versions
+<<<<<<< HEAD
 .php.cjs
 yarn.lock
+=======
+>>>>>>> 38ba255e9eaf26afd374efee6ad50c80943ebcbb
