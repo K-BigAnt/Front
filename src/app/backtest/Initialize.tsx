@@ -1,6 +1,8 @@
 import { useState } from "react";
-import { useInput } from "../hooks/useInput";
+
 import Dropdown from "../component/common/Dropdown";
+import SearchBar from "../component/common/SearchBar";
+import { useInput } from "../hooks/useInput";
 
 export default function Initialize() {
   const [initAmount, setInitAmount] = useInput(
@@ -53,6 +55,7 @@ export default function Initialize() {
 
         <div className="m-10">
           <div>포트폴리오</div>
+          <SearchBar />
         </div>
       </div>
       <button className="items-center justify-center">백테스트 실행</button>
