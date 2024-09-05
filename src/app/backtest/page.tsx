@@ -28,7 +28,7 @@ export default function BacktestPage() {
     <div className="flex flex-col items-center justify-center mt-10 gap-y-10">
       <Initialize />
 
-      <button>백테스트 실행</button>
+      <button className="mt-20  ">백테스트 실행</button>
       {typeof window !== "undefined" && <Pie />}
       {typeof window !== "undefined" && (
         <Financial data={DataToFinancial(data.prices)} />

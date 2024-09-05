@@ -1,11 +1,11 @@
 import { useState } from "react";
 
 import Dropdown from "../component/common/Dropdown";
-import SearchBar from "../component/common/SearchBar";
 import { useInput } from "../hooks/useInput";
+import StockSearch from "./StockSearch";
 
 export default function Initialize() {
-  const [initAmount, setInitAmount] = useInput(
+  const [initAmount, , initOnChange] = useInput(
     "",
     (value: string) => value.length < 10
   );
@@ -41,7 +41,7 @@ export default function Initialize() {
               type="text"
               className="border-2 border-gray-300 rounded-md"
               value={initAmount}
-              onChange={setInitAmount}
+              onChange={initOnChange}
             />
           </div>
 
@@ -52,13 +52,11 @@ export default function Initialize() {
             options={["월별", "분기별", "반기별", "연별"]}
           />
         </div>
-
-        <div className="m-10">
-          <div>포트폴리오</div>
-          <SearchBar />
+        <div className="flex flex-col items-center justify-center gap-y-10">
+          포트폴리오
+          <StockSearch />
         </div>
       </div>
-      <button className="items-center justify-center">백테스트 실행</button>
     </div>
   );
 }
