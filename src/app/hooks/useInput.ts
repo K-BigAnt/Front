@@ -3,7 +3,11 @@ import { useState } from "react";
 export const useInput = (
   initialValue: string,
   branchFuction: (value: string) => boolean
-): [string, (e: React.ChangeEvent<HTMLInputElement>) => void] => {
+): [
+  string,
+  (value: string) => void,
+  (e: React.ChangeEvent<HTMLInputElement>) => void,
+] => {
   const [value, setValue] = useState(initialValue);
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (branchFuction(e.target.value)) {
@@ -11,5 +15,5 @@ export const useInput = (
     }
   };
 
-  return [value, onChange];
+  return [value, setValue, onChange];
 };

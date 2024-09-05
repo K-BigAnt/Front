@@ -1,15 +1,26 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
+import { useInput } from "./useInput";
 
-export const useDebounce = <T>(value: string, delay: number, api: string) => {
+export const useDebounce = <T>(delay: number, api: string) => {
+  const [initValue, setInitValue, initOnChange] = useInput("", (value) => true);
   const [debouncedValue, setDebouncedValue] = useState<T | null>(null);
+  const [isOpen, setIsOpen] = useState(true);
+
   useEffect(() => {
     const handler = setTimeout(() => {
-      axios.get(`${api}${value}`).then((res) => {
+      axios.get(`${api}${initValue}`).then((res) => {
         setDebouncedValue(res.data as T);
       });
     }, delay);
     return () => clearTimeout(handler);
-  }, [value, delay, api]);
-  return debouncedValue;
+  }, [initValue, delay, api]);
+  return {
+    initValue,
+    setInitValue,
+    initOnChange,
+    debouncedValue,
+    isOpen,
+    setIsOpen,
+  };
 };
