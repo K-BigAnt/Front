@@ -17,8 +17,6 @@ export default function Initialize() {
     "",
     (value: string) => value.length < 10
   );
-  const [rebalancing, setRebalancing] = useState("");
-
   const [stock, setStock] = useState<stockInfo>({
     startDate: "",
     endDate: "",
@@ -80,8 +78,8 @@ export default function Initialize() {
 
           <Dropdown
             initialValue="리밸런싱"
-            seleted={rebalancing}
-            setSelected={setRebalancing}
+            seleted={stock.rebalancing}
+            setSelected={(value) => setStock({ ...stock, rebalancing: value })}
             options={["반기별"]}
           />
         </div>
