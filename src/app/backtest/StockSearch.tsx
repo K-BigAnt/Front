@@ -1,4 +1,18 @@
 import { useDebounce } from "@/app/hooks/useDebounce";
+
+interface Props {
+  stock: stockInfo;
+  setStock: (stock: stockInfo) => void;
+}
+
+interface stockInfo {
+  startDate: string;
+  endDate: string;
+  initialAsset: number;
+  rebalancing: string;
+  stock: string[];
+}
+
 interface SearchResult {
   name: string;
   symbol: string;
@@ -6,7 +20,7 @@ interface SearchResult {
   country: string;
 }
 
-export default function StockSearch() {
+export default function StockSearch({ stock, setStock }: Props) {
   const {
     initValue,
     setInitValue,
@@ -39,6 +53,7 @@ export default function StockSearch() {
                 isOpen ? "block" : "hidden"
               }`}
               onMouseDown={() => {
+                setStock({ ...stock, stock: [...stock.stock, result.name] });
                 setInitValue(result.name);
                 setIsOpen(false);
               }}
