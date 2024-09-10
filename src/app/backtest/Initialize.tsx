@@ -94,9 +94,8 @@ export default function Initialize() {
               />
             );
           })}
+          <button onClick={handleAddStock}>종목 추가</button>
         </div>
-
-        <button onClick={handleAddStock}>종목 추가</button>
         <button className="ml-10" onClick={handleBacktest}>
           백테스트 실행
         </button>
