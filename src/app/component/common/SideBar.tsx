@@ -6,7 +6,6 @@ export default function SideBar() {
   const router = useRouter();
   const path = usePathname();
 
-  console.log;
   return (
     <div className="flex flex-col items-start justify-center mx-10">
       <div className="text-4xl font-bold mb-10">로고</div>
