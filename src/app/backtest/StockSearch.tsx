@@ -1,7 +1,10 @@
 import { useDebounce } from "@/app/hooks/useDebounce";
+import { useEffect } from "react";
 
 interface Props {
   stock: stockInfo;
+  stockText: string;
+  index: number;
   setStock: (stock: stockInfo) => void;
 }
 
@@ -20,7 +23,12 @@ interface SearchResult {
   country: string;
 }
 
-export default function StockSearch({ stock, setStock }: Props) {
+export default function StockSearch({
+  stock,
+  setStock,
+  stockText,
+  index,
+}: Props) {
   const {
     initValue,
     setInitValue,
@@ -29,6 +37,7 @@ export default function StockSearch({ stock, setStock }: Props) {
     isOpen,
     setIsOpen,
   } = useDebounce<SearchResult[]>(
+    stockText,
     200,
     "http://localhost:3000/api/stock?search="
   );
@@ -53,7 +62,9 @@ export default function StockSearch({ stock, setStock }: Props) {
                 isOpen ? "block" : "hidden"
               }`}
               onMouseDown={() => {
-                setStock({ ...stock, stock: [...stock.stock, result.name] });
+                const newStock = stock.stock;
+                newStock[index] = result.name;
+                setStock({ ...stock, stock: newStock });
                 setInitValue(result.name);
                 setIsOpen(false);
               }}
