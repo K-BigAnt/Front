@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "@radix-ui/themes/styles.css";
 import "./globals.css";
+import SideBar from "./component/common/SideBar";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -17,7 +18,14 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <body className={inter.className}>
+        <div className="flex w-full h-full mx-10 mt-10">
+          <div className="w-[20%] h-full">
+            <SideBar />
+          </div>
+          <div className="w-[80%] h-full">{children}</div>
+        </div>
+      </body>
     </html>
   );
 }
