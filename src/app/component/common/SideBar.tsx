@@ -29,6 +29,7 @@ export default function SideBar() {
         >
           게시판
         </div>
+        <div className="text-2xl font-bold"> 로그인 </div>
       </div>
     </div>
   );
