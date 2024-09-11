@@ -101,9 +101,7 @@ export default function Initialize({ portfolio }: Props) {
 }
 
 const getPortfolio = (portfolio: string): stockInfo => {
-  console.log(portfolio, 111, portfolio == "레이달리오 포트폴리오");
   if (portfolio === "레이달리오 포트폴리오") {
-    console.log("레이달리오 포트폴222리오");
     const stockInfo: stockInfo = {
       startDate: "2024-04-01",
       endDate: "2024-07-01",
