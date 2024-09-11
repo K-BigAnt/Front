@@ -3,7 +3,6 @@ import { useState } from "react";
 import Dropdown from "../component/common/Dropdown";
 import { useInput } from "../hooks/useInput";
 import StockSearch from "./StockSearch";
-
 interface stockInfo {
   startDate: string;
   endDate: string;
@@ -12,25 +11,20 @@ interface stockInfo {
   stock: string[];
 }
 
-export default function Initialize() {
+interface Props {
+  portfolio: string;
+}
+
+export default function Initialize({ portfolio }: Props) {
   const [initAmount, , initOnChange] = useInput(
     "",
     (value: string) => value.length < 10
   );
-  const [stock, setStock] = useState<stockInfo>({
-    startDate: "",
-    endDate: "",
-    initialAsset: 0,
-    rebalancing: "반기별",
-    stock: [],
-  });
-
+  const [stock, setStock] = useState<stockInfo>(getPortfolio(portfolio));
   const handleAddStock = () => {
     setStock({ ...stock, stock: [...stock.stock, ""] });
   };
-
   const handleBacktest = () => {
-    // 백테스트 실행하기 버튼시 stock 정보를 백엔드로 보내기
     console.log(stock);
   };
 
@@ -89,6 +83,8 @@ export default function Initialize() {
             return (
               <StockSearch
                 key={item + index}
+                index={index}
+                stockText={item}
                 stock={stock}
                 setStock={setStock}
               />
@@ -103,3 +99,55 @@ export default function Initialize() {
     </div>
   );
 }
+
+const getPortfolio = (portfolio: string): stockInfo => {
+  console.log(portfolio, 111, portfolio == "레이달리오 포트폴리오");
+  if (portfolio === "레이달리오 포트폴리오") {
+    console.log("레이달리오 포트폴222리오");
+    const stockInfo: stockInfo = {
+      startDate: "2024-04-01",
+      endDate: "2024-07-01",
+      initialAsset: 100000000,
+      rebalancing: "반기별",
+      stock: ["삼성전자", "SK하이닉스", "현대차", "삼성바이오로그램"],
+    };
+    return stockInfo;
+  }
+  if (portfolio === "그레그 포트폴리오") {
+    const stockInfo: stockInfo = {
+      startDate: "2024-04-01",
+      endDate: "2024-07-01",
+      initialAsset: 100000000,
+      rebalancing: "반기별",
+      stock: ["비브라눔", "최후의 속삭임", "그래피비", "파라바림", "그래피비"],
+    };
+    return stockInfo;
+  }
+  if (portfolio === "프리가바 포트폴리오") {
+    const stockInfo: stockInfo = {
+      startDate: "2024-04-01",
+      endDate: "2024-07-01",
+      initialAsset: 100000000,
+      rebalancing: "반기별",
+      stock: ["플레이므", "가르바리", "홀리만", "슬레디아"],
+    };
+    return stockInfo;
+  }
+  if (portfolio === "필라인 포트폴리오") {
+    const stockInfo: stockInfo = {
+      startDate: "2024-04-01",
+      endDate: "2024-07-01",
+      initialAsset: 100000000,
+      rebalancing: "반기별",
+      stock: ["피미난", "필라인 가라", "플레요", "블래기"],
+    };
+    return stockInfo;
+  }
+  return {
+    startDate: "2024-04-01",
+    endDate: "2024-07-01",
+    initialAsset: 0,
+    rebalancing: "반기별",
+    stock: [],
+  };
+};

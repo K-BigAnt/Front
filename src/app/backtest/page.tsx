@@ -1,52 +1,61 @@
 "use client";
 
-import React, { useState } from "react";
-import dynamic from "next/dynamic";
-import axios from "axios";
-import useSWR from "swr";
-import Initialize from "./Initialize";
-
-const Financial = dynamic(() => import("../component/Chart/Financial"), {
-  ssr: false,
-});
-
-const Pie = dynamic(() => import("../component/Chart/Pie"), {
-  ssr: false,
-});
+import { useRouter } from "next/navigation";
 
 export default function BacktestPage() {
-  const fetcher = (url: string) => axios.get(url).then((res) => res.data);
-  const { data, error, isLoading } = useSWR(
-    "http://localhost:80/v1/stock/price?symbol=000050&start_date=2024-04-01&end_date=2024-07-01",
-    fetcher
-  );
-
-  if (error) return <div>Error: {error.message}</div>;
-  if (isLoading) return <div>Loading...</div>;
-
+  const router = useRouter();
   return (
-    <div className="flex flex-col items-center justify-center mt-10 gap-y-10">
-      <Initialize />
+    <div className="flex flex-col items-center justify-center gap-y-10 text-center">
+      <div className="flex flex-row items-center justify-center gap-x-10 text-center">
+        <div
+          className="w-[200px] h-[200px] border-2 border-black"
+          onClick={() => {
+            router.push("/backtest/detail?portfolio=레이달리오 포트폴리오");
+          }}
+        >
+          레이달리오 포트폴리오
+        </div>
+        <div
+          className="w-[200px] h-[200px] border-2 border-black"
+          onClick={() => {
+            router.push("/backtest/detail?portfolio=그레그 포트폴리오");
+          }}
+        >
+          그레그 포트폴리오
+        </div>
+        <div
+          className="w-[200px] h-[200px] border-2 border-black"
+          onClick={() => {
+            router.push("/backtest/detail?portfolio=프리가바 포트폴리오");
+          }}
+        >
+          프리가바 포트폴리오
+        </div>
+        <div
+          className="w-[200px] h-[200px] border-2 border-black"
+          onClick={() => {
+            router.push("/backtest/detail?portfolio=필라인 포트폴리오");
+          }}
+        >
+          필라인 포트폴리오
+        </div>
+        <div className="w-[200px] h-[200px] border-2 border-black">네모</div>
+      </div>
 
-      <button className="mt-20  ">백테스트 실행</button>
-      {typeof window !== "undefined" && <Pie />}
-      {typeof window !== "undefined" && (
-        <Financial data={DataToFinancial(data.prices)} />
-      )}
+      <div className="flex flex-row items-center justify-center gap-x-10">
+        <div className="w-[200px] h-[200px] border-2 border-black">네모</div>
+        <div className="w-[200px] h-[200px] border-2 border-black">네모</div>
+        <div className="w-[200px] h-[200px] border-2 border-black">네모</div>
+        <div className="w-[200px] h-[200px] border-2 border-black">네모</div>
+        <div className="w-[200px] h-[200px] border-2 border-black">네모</div>
+      </div>
+      <div className="flex flex-row items-center justify-center gap-x-10">
+        <div className="w-[200px] h-[200px] border-2 border-black">네모</div>
+        <div className="w-[200px] h-[200px] border-2 border-black">네모</div>
+        <div className="w-[200px] h-[200px] border-2 border-black">네모</div>
+        <div className="w-[200px] h-[200px] border-2 border-black">네모</div>
+        <div className="w-[200px] h-[200px] border-2 border-black">네모</div>
+      </div>
     </div>
   );
 }
-
-const DataToFinancial = (prices: any) => {
-  const data = prices.map((price: any) => {
-    const timestamp = new Date(
-      price.date.slice(0, 4) +
-        "-" +
-        price.date.slice(4, 6) +
-        "-" +
-        price.date.slice(6, 8)
-    ).getTime();
-    return [timestamp, parseFloat(price.closePrice)];
-  });
-  return data.reverse();
-};
