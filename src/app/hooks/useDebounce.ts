@@ -12,7 +12,6 @@ export const useDebounce = <T>(
     (value) => true
   );
   const [debouncedValue, setDebouncedValue] = useState<T | null>(null);
-  const [isOpen, setIsOpen] = useState(true);
 
   useEffect(() => {
     const handler = setTimeout(() => {
@@ -27,7 +26,5 @@ export const useDebounce = <T>(
     setInitValue,
     initOnChange,
     debouncedValue,
-    isOpen,
-    setIsOpen,
   };
 };

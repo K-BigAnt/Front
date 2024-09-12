@@ -1,19 +1,12 @@
 import { useDebounce } from "@/app/hooks/useDebounce";
-import { useEffect } from "react";
+import { stockInfo } from "../types/stock";
+import { useState } from "react";
 
 interface Props {
+  index: number;
   stock: stockInfo;
   stockText: string;
-  index: number;
   setStock: (stock: stockInfo) => void;
-}
-
-interface stockInfo {
-  startDate: string;
-  endDate: string;
-  initialAsset: number;
-  rebalancing: string;
-  stock: string[];
 }
 
 interface SearchResult {
@@ -29,18 +22,10 @@ export default function StockSearch({
   stockText,
   index,
 }: Props) {
-  const {
-    initValue,
-    setInitValue,
-    initOnChange,
-    debouncedValue,
-    isOpen,
-    setIsOpen,
-  } = useDebounce<SearchResult[]>(
-    stockText,
-    200,
-    "http://localhost:3000/api/stock?search="
-  );
+  const { initValue, setInitValue, initOnChange, debouncedValue } = useDebounce<
+    SearchResult[]
+  >(stockText, 200, "http://localhost:80/v1/stock?query=");
+  const [isOpen, setIsOpen] = useState(true);
 
   return (
     <div className="relative">
@@ -58,13 +43,11 @@ export default function StockSearch({
           debouncedValue?.map((result) => (
             <div
               key={result.symbol}
-              className={`cursor-pointer  bg-white hover:bg-gray-100 p-1 rounded-md ${
+              className={`cursor-pointer  bg-white hover:bg-gray-100 p-1 ${
                 isOpen ? "block" : "hidden"
               }`}
               onMouseDown={() => {
-                const newStock = stock.stock;
-                newStock[index] = result.name;
-                setStock({ ...stock, stock: newStock });
+                setStock(setStockState(stock, index, result));
                 setInitValue(result.name);
                 setIsOpen(false);
               }}
@@ -76,3 +59,13 @@ export default function StockSearch({
     </div>
   );
 }
+
+const setStockState = (
+  stock: stockInfo,
+  index: number,
+  result: SearchResult
+) => {
+  const newStock = stock.stock;
+  newStock[index] = result.name;
+  return { ...stock, stock: newStock };
+};
