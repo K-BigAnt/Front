@@ -1,19 +1,19 @@
 "use client";
 
-import Initialize from "../../component/detail/Initialize";
 import useSWR from "swr";
 import dynamic from "next/dynamic";
 import { useSearchParams } from "next/navigation";
 import { fetcher } from "@/app/utils/fetcher";
+import Initialize from "@/app/component/backtest/detail/Initialize";
 
 const Financial = dynamic(
-  () => import("../../component/detail/Chart/Financial"),
+  () => import("@/app/component/backtest/detail/Chart/Financial"),
   {
     ssr: false,
   }
 );
 
-const Pie = dynamic(() => import("../../component/detail/Chart/Pie"), {
+const Pie = dynamic(() => import("@/app/component/backtest/detail/Chart/Pie"), {
   ssr: false,
 });
 

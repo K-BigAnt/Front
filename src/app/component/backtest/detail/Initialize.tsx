@@ -1,8 +1,8 @@
 import { useState } from "react";
 
-import { useInput } from "../../hooks/useInput";
-import { stockInfo } from "../../types/stock";
-import StockSearch from "./StockSearch";
+import { useInput } from "@/app/hooks/useInput";
+import { stockInfo } from "@/app/types/stock";
+import StockSearch from "@/app/component/backtest/detail/StockSearch";
 
 interface Props {
   portfolio: string;
