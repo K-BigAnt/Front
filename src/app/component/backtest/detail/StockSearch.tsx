@@ -28,17 +28,19 @@ export default function StockSearch({
   const [isOpen, setIsOpen] = useState(true);
 
   return (
-    <div className="relative">
+    <div>
       종목
       <input
         type="text"
         className="border-2 border-gray-300 rounded-md"
         value={initValue}
         onChange={initOnChange}
-        onFocus={() => setIsOpen(true)}
+        onFocus={() => {
+          if (initValue === "") setIsOpen(true);
+        }}
         onBlur={() => setIsOpen(false)}
       />
-      <div className="absolute top-9 left-0">
+      <div className="max-h-[200px] max-w-[400px] overflow-y-auto overflow-x-hidden">
         {isOpen &&
           debouncedValue?.map((result) => (
             <div
