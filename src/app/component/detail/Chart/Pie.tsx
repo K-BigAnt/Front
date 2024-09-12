@@ -10,6 +10,8 @@ export default function Pie() {
         options={{
           labels: ["A", "B", "C", "D"],
         }}
+        width={500}
+        height={500}
       />
     </>
   );
