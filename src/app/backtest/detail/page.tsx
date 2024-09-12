@@ -4,8 +4,6 @@ import useSWR from "swr";
 import dynamic from "next/dynamic";
 import { useSearchParams } from "next/navigation";
 import { fetcher } from "@/app/utils/fetcher";
-import Initialize from "@/app/component/backtest/detail/Initialize";
-import { Suspense } from "react";
 
 const Financial = dynamic(
   () => import("@/app/component/backtest/detail/Chart/Financial"),
