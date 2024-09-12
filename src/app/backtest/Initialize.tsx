@@ -1,15 +1,8 @@
 import { useState } from "react";
 
-import Dropdown from "../component/common/Dropdown";
 import { useInput } from "../hooks/useInput";
+import { stockInfo } from "../types/stock";
 import StockSearch from "./StockSearch";
-interface stockInfo {
-  startDate: string;
-  endDate: string;
-  initialAsset: number;
-  rebalancing: string;
-  stock: string[];
-}
 
 interface Props {
   portfolio: string;
@@ -20,13 +13,13 @@ export default function Initialize({ portfolio }: Props) {
     "",
     (value: string) => value.length < 10
   );
-  const [stock, setStock] = useState<stockInfo>(getPortfolio(portfolio));
+  const [stockInfo, setStockInfo] = useState<stockInfo>(
+    getPortfolio(portfolio)
+  );
   const handleAddStock = () => {
-    setStock({ ...stock, stock: [...stock.stock, ""] });
+    setStockInfo({ ...stockInfo, stock: [...stockInfo.stock, ""] });
   };
-  const handleBacktest = () => {
-    console.log(stock);
-  };
+  const handleBacktest = () => {};
 
   return (
     <div>
@@ -34,15 +27,15 @@ export default function Initialize({ portfolio }: Props) {
         <div className="flex flex-col items-center justify-center gap-y-10">
           <div>
             <div>기간</div>
-            <div className="flex flex-row items-center justify-center gap-10">
+            <div className="flex flex-row gap-x-10 mx-10">
               <div>
                 시작
                 <input
                   type="month"
                   className="border-2 border-gray-300 rounded-md"
-                  value={stock.startDate}
+                  value={stockInfo.startDate}
                   onChange={(e) =>
-                    setStock({ ...stock, startDate: e.target.value })
+                    setStockInfo({ ...stockInfo, startDate: e.target.value })
                   }
                 />
               </div>
@@ -51,9 +44,9 @@ export default function Initialize({ portfolio }: Props) {
                 <input
                   type="month"
                   className="border-2 border-gray-300 rounded-md"
-                  value={stock.endDate}
+                  value={stockInfo.endDate}
                   onChange={(e) =>
-                    setStock({ ...stock, endDate: e.target.value })
+                    setStockInfo({ ...stockInfo, endDate: e.target.value })
                   }
                 />
               </div>
@@ -70,23 +63,21 @@ export default function Initialize({ portfolio }: Props) {
             />
           </div>
 
-          <Dropdown
-            initialValue="리밸런싱"
-            seleted={stock.rebalancing}
-            setSelected={(value) => setStock({ ...stock, rebalancing: value })}
-            options={["반기별"]}
-          />
+          <div>
+            <div>리밸런싱</div>
+            년별
+          </div>
         </div>
         <div className="flex flex-col items-center justify-center gap-y-10">
           포트폴리오
-          {stock.stock.map((item, index) => {
+          {stockInfo.stock.map((item, index) => {
             return (
               <StockSearch
                 key={item + index}
                 index={index}
                 stockText={item}
-                stock={stock}
-                setStock={setStock}
+                stock={stockInfo}
+                setStock={setStockInfo}
               />
             );
           })}
