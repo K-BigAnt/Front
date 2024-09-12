@@ -10,6 +10,7 @@ export default function BacktestPage() {
     "그레그 포트폴리오",
     "프리가바 포트폴리오",
     "필라인 포트폴리오",
+    "비어있는 포트폴리오",
   ];
 
   return (

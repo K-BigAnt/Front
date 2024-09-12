@@ -137,6 +137,6 @@ const getPortfolio = (portfolio: string): stockInfo => {
     endDate: "2024-07-01",
     initialAsset: 0,
     rebalancing: "반기별",
-    stock: [],
+    stock: [""],
   };
 };
