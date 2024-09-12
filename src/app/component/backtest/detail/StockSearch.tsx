@@ -35,9 +35,7 @@ export default function StockSearch({
         className="border-2 border-gray-300 rounded-md"
         value={initValue}
         onChange={initOnChange}
-        onFocus={() => {
-          if (initValue === "") setIsOpen(true);
-        }}
+        onFocus={() => setIsOpen(true)}
         onBlur={() => setIsOpen(false)}
       />
       <div className="max-h-[200px] max-w-[400px] overflow-y-auto overflow-x-hidden">
