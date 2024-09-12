@@ -32,7 +32,7 @@ export default function FinancialChart({ data }: Props) {
 function Financial({ data, startDate, endDate }: FinancialProps) {
   const series: FinancialChartState["series"] = [
     {
-      data: data,
+      data: DataToFinancial(data),
     },
   ];
 
@@ -177,3 +177,17 @@ function Financial({ data, startDate, endDate }: FinancialProps) {
     </>
   );
 }
+
+const DataToFinancial = (prices: any) => {
+  const data = prices.map((price: any) => {
+    const timestamp = new Date(
+      price.date.slice(0, 4) +
+        "-" +
+        price.date.slice(4, 6) +
+        "-" +
+        price.date.slice(6, 8)
+    ).getTime();
+    return [timestamp, parseFloat(price.closePrice)];
+  });
+  return data.reverse();
+};

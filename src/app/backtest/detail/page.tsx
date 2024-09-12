@@ -33,23 +33,7 @@ export default function BacktestDetailPage() {
       {portfolio}
       <Initialize portfolio={portfolio ?? ""} />
       {typeof window !== "undefined" && <Pie />}
-      {typeof window !== "undefined" && (
-        <Financial data={DataToFinancial(data.prices)} />
-      )}
+      {typeof window !== "undefined" && <Financial data={data.prices} />}
     </div>
   );
 }
-
-const DataToFinancial = (prices: any) => {
-  const data = prices.map((price: any) => {
-    const timestamp = new Date(
-      price.date.slice(0, 4) +
-        "-" +
-        price.date.slice(4, 6) +
-        "-" +
-        price.date.slice(6, 8)
-    ).getTime();
-    return [timestamp, parseFloat(price.closePrice)];
-  });
-  return data.reverse();
-};
