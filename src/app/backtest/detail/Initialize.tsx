@@ -1,7 +1,7 @@
 import { useState } from "react";
 
-import { useInput } from "../hooks/useInput";
-import { stockInfo } from "../types/stock";
+import { useInput } from "../../hooks/useInput";
+import { stockInfo } from "../../types/stock";
 import StockSearch from "./StockSearch";
 
 interface Props {
