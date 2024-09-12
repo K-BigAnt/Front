@@ -2,7 +2,7 @@
 
 import { useRouter } from "next/navigation";
 
-export default function BacktestPage() {
+export default function BackTest() {
   const router = useRouter();
 
   const portfolio = [
