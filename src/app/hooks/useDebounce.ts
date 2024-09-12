@@ -14,6 +14,11 @@ export const useDebounce = <T>(
   const [debouncedValue, setDebouncedValue] = useState<T | null>(null);
 
   useEffect(() => {
+    if (initValue === "") {
+      setDebouncedValue(null);
+      return;
+    }
+
     const handler = setTimeout(() => {
       axios.get(`${api}${initValue}`).then((res) => {
         setDebouncedValue(res.data as T);
