@@ -1,5 +1,5 @@
 import { useDebounce } from "@/app/hooks/useDebounce";
-import { stockInfo } from "../../types/stock";
+import { stockInfo } from "@/app/types/stock";
 import { useState } from "react";
 
 interface Props {
