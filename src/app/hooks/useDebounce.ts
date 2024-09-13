@@ -7,10 +7,7 @@ export const useDebounce = <T>(
   delay: number,
   api: string
 ) => {
-  const [initValue, setInitValue, initOnChange] = useInput(
-    initString,
-    (value) => true
-  );
+  const [initValue, setInitValue, initOnChange] = useInput(initString);
   const [debouncedValue, setDebouncedValue] = useState<T | null>(null);
 
   useEffect(() => {
