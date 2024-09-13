@@ -9,9 +9,9 @@ interface Props {
 }
 
 export default function Initialize({ portfolio }: Props) {
-  const [initAmount, , initOnChange] = useInput(
+  const [initAmount, , handleInitAmount] = useInput(
     "",
-    (value: string) => value.length < 10
+    (value: string) => value.length < 10 && !isNaN(parseInt(value))
   );
   const [stockInfo, setStockInfo] = useState<stockInfo>(
     getPortfolio(portfolio)
@@ -59,7 +59,13 @@ export default function Initialize({ portfolio }: Props) {
               type="text"
               className="border-2 border-gray-300 rounded-md"
               value={initAmount}
-              onChange={initOnChange}
+              onChange={(e) => {
+                handleInitAmount(e);
+                setStockInfo({
+                  ...stockInfo,
+                  initialAsset: parseInt(e.target.value),
+                });
+              }}
             />
           </div>
 
