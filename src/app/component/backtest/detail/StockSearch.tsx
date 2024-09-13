@@ -22,9 +22,8 @@ export default function StockSearch({
   stockText,
   index,
 }: Props) {
-  const { initValue, setInitValue, initOnChange, debouncedValue } = useDebounce<
-    SearchResult[]
-  >(stockText, 200, "http://localhost:80/v1/stock?query=");
+  const { initValue, setInitValue, handleInitValue, debouncedValue } =
+    useDebounce<SearchResult[]>(stockText, 200, "http://localhost:80/v1/stock?query=");
   const [isOpen, setIsOpen] = useState(true);
 
   return (
@@ -34,7 +33,7 @@ export default function StockSearch({
         type="text"
         className="border-2 border-gray-300 rounded-md"
         value={initValue}
-        onChange={initOnChange}
+        onChange={handleInitValue}
         onFocus={() => setIsOpen(true)}
         onBlur={() => setIsOpen(false)}
       />

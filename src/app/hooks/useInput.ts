@@ -9,11 +9,11 @@ export const useInput = (
   (e: React.ChangeEvent<HTMLInputElement>) => void,
 ] => {
   const [value, setValue] = useState(initialValue);
-  const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleValue = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (!branchFuction || branchFuction(e.target.value)) {
       setValue(e.target.value);
     }
   };
 
-  return [value, setValue, onChange];
+  return [value, setValue, handleValue];
 };
