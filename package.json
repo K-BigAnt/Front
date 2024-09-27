@@ -54,5 +54,5 @@
     "typescript": "^5",
     "typescript-eslint": "^7.17.0"
   },
-  "packageManager": "yarn@4.4.0"
+  "packageManager": "yarn@4.5.0"
 }
