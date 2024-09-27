@@ -1,7 +1,7 @@
 import React from "react";
 import OAuth from "./OAuth";
 import Title from "./Title";
-import { Button } from "../../../components/ui/Button"; // 경로 수정
+import { Button } from "../../../components/ui/button"; // 경로 수정
 
 const Login = () => {
   const oAuths = ["kakao", "naver", "google"];

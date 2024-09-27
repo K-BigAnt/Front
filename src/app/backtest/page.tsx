@@ -1,48 +1,33 @@
 "use client";
 
-import React from "react";
-import dynamic from "next/dynamic";
-import axios from "axios";
-import useSWR from "swr";
+import { useRouter } from "next/navigation";
 
-const Financial = dynamic(() => import("../component/Chart/Financial"), {
-  ssr: false,
-});
+export default function BackTest() {
+  const router = useRouter();
 
-const Pie = dynamic(() => import("../component/Chart/Pie"), {
-  ssr: false,
-});
-
-export default function BacktestPage() {
-  const fetcher = (url: string) => axios.get(url).then((res) => res.data);
-  const { data, error, isLoading } = useSWR(
-    "http://localhost:80/v1/stock/price?symbol=000050&start_date=2024-04-01&end_date=2024-07-01",
-    fetcher
-  );
-
-  if (error) return <div>Error: {error.message}</div>;
-  if (isLoading) return <div>Loading...</div>;
+  const portfolio = [
+    "레이달리오 포트폴리오",
+    "그레그 포트폴리오",
+    "프리가바 포트폴리오",
+    "필라인 포트폴리오",
+    "비어있는 포트폴리오",
+  ];
 
   return (
-    <div className="flex flex-col items-center justify-center mt-10">
-      {typeof window !== "undefined" && <Pie />}
-      {typeof window !== "undefined" && (
-        <Financial data={DataToFinancial(data.prices)} />
-      )}
+    <div className="flex flex-col items-center justify-center gap-y-10 text-center">
+      <div className="flex flex-row items-center justify-center gap-x-10 text-center">
+        {portfolio.map((portfolio) => (
+          <div
+            key={portfolio}
+            className="w-[200px] h-[200px] border-2 border-black"
+            onClick={() => {
+              router.push(`/backtest/detail?portfolio=${portfolio}`);
+            }}
+          >
+            {portfolio}
+          </div>
+        ))}
+      </div>
     </div>
   );
 }
-
-const DataToFinancial = (prices: any) => {
-  const data = prices.map((price: any) => {
-    const timestamp = new Date(
-      price.date.slice(0, 4) +
-        "-" +
-        price.date.slice(4, 6) +
-        "-" +
-        price.date.slice(6, 8)
-    ).getTime();
-    return [timestamp, parseFloat(price.closePrice)];
-  });
-  return data.reverse();
-};

@@ -5,8 +5,8 @@ import axios from "axios";
 import useSWR from "swr";
 
 export default function Home() {
-  const fetcher = () => axios.get("/api/test").then((res) => res.data);
-  const { data, error, isLoading } = useSWR("/api/test", fetcher);
+  const fetcher = () => axios.get("/api/v1/test").then((res) => res.data);
+  const { data, error, isLoading } = useSWR("/api/v1/test", fetcher);
 
   return (
     <div>
